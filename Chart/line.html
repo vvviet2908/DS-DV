@@ -5,7 +5,8 @@
  <title>Line</title>
  
 <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"charset="utf-8"></script>
-
+<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+       
  </head>
  <body>
 
@@ -54,6 +55,7 @@
 				line-height: 20px;
 
 			}
+			
 			</style>
 		
 		<div id="tooltip" class="hidden">
@@ -97,9 +99,13 @@
 					.key(function(d) { return d.type; })
 					.entries(data);
 	console.log(dataset);
+	
+	var type = d3.annotationCalloutCircle
 
    
 //Create scale functions
+
+				
 				xScale = d3.scaleTime()
 							   .domain([
 									d3.min(data, function(d) { return d.date; }),
@@ -133,6 +139,8 @@
 				line = d3.line()
 							.x(function(d) { return xScale(d.date); })
 							.y(function(d) { return yScale(+d.cases); });
+							
+				
 
 
   
@@ -173,8 +181,7 @@
 					.attr("class", "axis")
 					.attr("transform", "translate(" + padding + ",0)")
 					.call(yAxis);
-
-	
+					
 				svg.append("text")
 					.attr("text-anchor", "end")
 					.attr("transform", "rotate(-90)")
@@ -192,9 +199,6 @@
 					.attr("x", w/2 - 90 )
 					.attr("y", h-20)
 					.text("Type: ");
-					
-					
-
 		 
 				let lines = svg.append('g')
 								.attr('class', 'lines');
@@ -212,6 +216,7 @@
 					.attr("id", 'tag'+d.key.replace(/\s+/g, '')) // assign ID
 					.attr("d", line(d.values));
 					
+				
 				//Create the dots on the lines
 				lines.selectAll("circle-group")
 					.data(dataset).enter()
@@ -247,9 +252,62 @@
 					.attr("font-size", "15px")			// style the legend
 					.style("fill", function() { // dynamic colours
 						return d.colorScale = colorScale(d.key); })       		
-					.text(d.key);                                   
+					.text(d.key);      
+				
+				
+			const annotations1 = [
+  {
+    note: {
+      label: "Date: 3/23/2020",
+	  bgPadding: 20,
+      title: "The most infected cases day"
+    },
+    x :600,
+	y:590,
+    dy: -100,
+    dx: -100
+  }
+]			
+	const makeAnnotations = d3.annotation()
+							//.editMode(true)
+							.type(type)
+							.annotations(annotations1)
+	
+				
+				d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations)
 
+const annotations2 = [
+  {
+    note: {
+      label: "Date: 5/15/2020 ",
+	  bgPadding: 20,
+      title: "Almost cases are overseas people who taken the quarantine "
+    },
+    x :1082,
+	y:590,
+    dy: -100,
+    dx: 0
+  }
+]
+const Anno1 = d3.annotation()
+							//.editMode(true)
+							.type(type)
+							.annotations(annotations2)
+	
+				
+				d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(Anno1)
+		
+					
+				
+				
 			});
+			
 
  }});
 			
@@ -261,5 +319,3 @@
 
  </body>
 </html>
-
-
