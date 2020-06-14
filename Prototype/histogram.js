@@ -1,15 +1,12 @@
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 30, left: 40},
     width = 600 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    height = 600 - margin.top - margin.bottom;
 var formatCount = d3.format(",.0f");
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
 var formatCount = d3.format(",.0f");
 // get the data
 var lab2data = [];
@@ -20,7 +17,13 @@ d3.csv("https://raw.githubusercontent.com/vvviet2908/DS-DV/master/covid19_patien
 	else {
 		lab2=data;
 		//console.log=(lab2);
-
+var svg = d3.select("#histogram")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	
   // X axis: scale and draw:
   var x = d3.scaleLinear()
       .domain([0, 100])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
@@ -68,7 +71,7 @@ d3.csv("https://raw.githubusercontent.com/vvviet2908/DS-DV/master/covid19_patien
           .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; })
           .attr("width", function(d) { return x(d.x1) - x(d.x0) - 1 ; })
           .attr("height", function(d) { return height - y(d.length); })
-			.attr("fill", "lightblue");
+			.attr("fill", "#CC2027");
 u.append("text")
     .attr("dy", ".75em")
     .attr("y", -12)
@@ -91,5 +94,12 @@ u.append("text")
   d3.select("#nBin").on("input", function() {
     update(+this.value);});	
 	
-	
+		svg.append("text")
+					.attr("text-anchor", "end")
+					.attr("font-family", "sans-serif")
+					.attr("font-size", "15px")
+					.attr("font-weight",700)
+					.attr("x", 300 )
+					.attr("y", 10)
+					.text("Age Histogram");
 }});

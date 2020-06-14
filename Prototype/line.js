@@ -1,5 +1,5 @@
 var w = 800;
-	var h = 400;
+	var h = 450;
 	var padding = 50;
 			
 			
@@ -31,7 +31,7 @@ var w = 800;
 					.entries(data);
 	//console.log(dataset);
 
-   
+
 //Create scale functions
 				xScale = d3.scaleTime()
 							   .domain([
@@ -70,7 +70,7 @@ var w = 800;
 
   
 				//Create SVG element
-				var svg = d3.select("#lineChart")
+				var linechart = d3.select("#lineChart")
 							.append("svg")
 							.attr("width", w)
 							.attr("height", h);
@@ -78,7 +78,7 @@ var w = 800;
 				var mouseover = function(d) {
 
 							var xPosition = parseFloat(d3.select(this).attr("cx")) + padding;
-							var yPosition = parseFloat(d3.select(this).attr("cy")) / 2 + h/ 2;
+							var yPosition = parseFloat(d3.select(this).attr("cy")) / 2 + h;
 
 								//Update the tooltip position and value
 								d3.select("#tooltip")
@@ -97,18 +97,18 @@ var w = 800;
 				}
 
 				//Create axis
-				svg.append("g")
+				linechart.append("g")
 					.attr("class", "axis")
 					.attr("transform", "translate(0," + (h - padding) + ")")
 					.call(xAxis);
 
-				svg.append("g")
+				linechart.append("g")
 					.attr("class", "axis")
 					.attr("transform", "translate(" + padding + ",0)")
 					.call(yAxis);
 
 	
-				svg.append("text")
+				linechart.append("text")
 					.attr("text-anchor", "end")
 					.attr("transform", "rotate(-90)")
 					.attr("font-family", "sans-serif")
@@ -117,19 +117,19 @@ var w = 800;
 					.attr("x", -20)
 					.text("Total Cases");
 	
-				svg.append("text")
+				linechart.append("text")
 					.attr("text-anchor", "end")
 					.attr("font-family", "sans-serif")
 					.attr("font-size", "15px")
 					.attr("font-weight",700)
-					.attr("x", w/2 - 90 )
+					.attr("x", 150 )
 					.attr("y", h-20)
 					.text("Type: ");
 					
 					
 
 		 
-				let lines = svg.append('g')
+				let lines = linechart.append('g')
 								.attr('class', 'lines');
 	
 
@@ -138,7 +138,7 @@ var w = 800;
 				// Loop through each symbol / key
 		dataset.forEach(function(d,i) {                          
 
-				svg.append("path")
+				linechart.append("path")
 					.attr("class", "line")
 					.style("stroke", function() { 
 						return d.colorScale = colorScale(d.key); })
@@ -163,8 +163,8 @@ var w = 800;
 					.on("mouseout", mouseout );
 				
 				//Add the legend
-				svg.append("circle")
-				.attr("cx", (legendSpace)+i*legendSpace/3-60)
+				linechart.append("circle")
+				.attr("cx", (legendSpace)+i*legendSpace/2-60)
 				.attr("cy", h - 25) // 100 is where the first dot appears. 25 is the distance between dots
 				.attr("r", 7)
 				.style("fill",function() { // dynamic colours
@@ -172,15 +172,69 @@ var w = 800;
  
 
 				// Add the Legend
-				svg.append("text")                                   
-					.attr("x", (legendSpace)+i*legendSpace/3) // spacing
+				linechart.append("text")                                   
+					.attr("x", (legendSpace)+i*legendSpace/2) // spacing
 					.attr("y", h - 20)         // *******
 					.attr("class", "legend") 
 					.attr("font-family", "sans-serif")
 					.attr("font-size", "15px")			// style the legend
 					.style("fill", function() { // dynamic colours
 						return d.colorScale = colorScale(d.key); })       		
-					.text(d.key);                                   
+					.text(d.key);    
+
+   var type = d3.annotationCalloutCircle
+   
+const annotations1 = [
+  {
+    note: {
+      label: "Date: 3/23/2020 Case: 26",
+	  bgPadding: 20,
+      title: "The most infected cases day"
+    },
+    x :370,
+	y:348,
+    dy: -100,
+    dx: -100
+  }
+]			
+	const makeAnnotations = d3.annotation()
+							//.editMode(true)
+							.type(type)
+							.annotations(annotations1)
+	
+				
+				d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations)
+
+const annotations2 = [
+  {
+    note: {
+      label: "Date: 5/15/2020 Case: 24",
+	  bgPadding: 20,
+      title: "Almost cases are overseas people who taken the quarantine "
+    },
+    x :650,
+	y:355,
+    dy: -100,
+    dx: 0
+  }
+]
+const Anno1 = d3.annotation()
+							//.editMode(true)
+							.type(type)
+							.annotations(annotations2)
+	
+				
+				d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(Anno1)
+		
+					
+				
+								
 
 			});
 

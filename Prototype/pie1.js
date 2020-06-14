@@ -3,8 +3,8 @@ d3.csv("https://raw.githubusercontent.com/vvviet2908/DS-DV/master/covid19_status
 
 var text = "";
 
-var width = 200;
-var height = 200;
+var width = 250;
+var height = 250;
 var thickness = 40;
 var duration = 750;
 var padding = 10;
@@ -14,11 +14,13 @@ var otherOpacityOnHover = .8;
 var tooltipMargin = 13;
 
 var radius = Math.min(width-padding, height-padding) / 2;
-var color = d3.scaleOrdinal(d3.schemeCategory10);
+var color = d3.scaleOrdinal()
+		.domain(["Being treated", "Recovered"])
+			.range(["#128C7E","#CC2027"]);
 
 var svg = d3.select("#pie1")
 .append('svg')
-.attr('class', 'pie')
+.attr('class', 'pie1')
 .attr('width', width)
 .attr('height', height);
 
@@ -33,7 +35,7 @@ var pie = d3.pie()
 .value(function(d) { return d.Value; })
 .sort(null);
 
-var path = g.selectAll('path')
+var path = g.selectAll('path1')
   .data(pie(data))
   .enter()
   .append("g")  
@@ -51,7 +53,7 @@ var path = g.selectAll('path')
       let g = d3.select("svg")
         .style("cursor", "pointer")
         .append("g")
-        .attr("class", "tooltip")
+        .attr("class", "tooltip1")
         .style("opacity", 0);
  
       g.append("text")
@@ -75,7 +77,7 @@ var path = g.selectAll('path')
         let x = mousePosition[0] + width/2;
         let y = mousePosition[1] + height/2 - tooltipMargin;
     
-        let text = d3.select('.tooltip text');
+        let text = d3.select('.tooltip1 text');
         let bbox = text.node().getBBox();
         if(x - bbox.width/2 < 0) {
           x = bbox.width/2;
@@ -91,15 +93,15 @@ var path = g.selectAll('path')
           y = height - bbox.height/2;
         }
     
-        d3.select('.tooltip')
+        d3.select('.tooltip1')
           .style("opacity", 1)
           .attr('transform',`translate(${x}, ${y})`);
     })
   .on("mouseout", function(d) {   
       d3.select("svg")
         .style("cursor", "none")  
-        .select(".tooltip").remove();
-    d3.selectAll('path')
+        .select(".tooltip1").remove();
+    d3.selectAll('path1')
         .style("opacity", opacity);
     })
   .on("touchstart", function(d) {
@@ -107,8 +109,11 @@ var path = g.selectAll('path')
         .style("cursor", "none");    
   })
   .each(function(d, i) { this._current = i; });
+  
+  
 
-let legend = d3.select("#chart").append('div')
+
+let legend = d3.select("#pie1").append('div')
 			.attr('class', 'legend')
 			.style('margin-top', '30px');
 

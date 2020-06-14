@@ -3,8 +3,8 @@ d3.csv("https://raw.githubusercontent.com/vvviet2908/DS-DV/master/covid19_nation
 
 var text = "";
 
-var width = 200;
-var height = 200;
+var width = 250;
+var height = 250;
 var thickness = 40;
 var duration = 750;
 var padding = 10;
@@ -18,7 +18,7 @@ var color = d3.scaleOrdinal(d3.schemeCategory10);
 
 var svg = d3.select("#pie2")
 .append('svg')
-.attr('class', 'pie')
+.attr('class', 'pie2')
 .attr('width', width)
 .attr('height', height);
 
@@ -33,7 +33,7 @@ var pie = d3.pie()
 .value(function(d) { return d.Number; })
 .sort(null);
 
-var path = g.selectAll('path')
+var path2 = g.selectAll('path2')
   .data(pie(data))
   .enter()
   .append("g")  
@@ -43,7 +43,7 @@ var path = g.selectAll('path')
   .style('opacity', opacity)
   .style('stroke', 'white')
   .on("mouseover", function(d) {
-      d3.selectAll('path')
+      d3.selectAll('path2')
         .style("opacity", otherOpacityOnHover);
       d3.select(this) 
         .style("opacity", opacityHover);
@@ -72,7 +72,7 @@ var path = g.selectAll('path')
     })
   .on("mousemove", function(d) {
         let mousePosition = d3.mouse(this);
-        let x = mousePosition[0] + width/2;
+        let x = mousePosition[0] + width;
         let y = mousePosition[1] + height/2 - tooltipMargin;
     
         let text = d3.select('.tooltip text');
@@ -99,7 +99,7 @@ var path = g.selectAll('path')
       d3.select("svg")
         .style("cursor", "none")  
         .select(".tooltip").remove();
-    d3.selectAll('path')
+    d3.selectAll('path2')
         .style("opacity", opacity);
     })
   .on("touchstart", function(d) {
@@ -108,7 +108,7 @@ var path = g.selectAll('path')
   })
   .each(function(d, i) { this._current = i; });
 
-let legend = d3.select("#chart").append('div')
+let legend = d3.select("#pie2").append('div')
 			.attr('class', 'legend')
 			.style('margin-top', '30px');
 
