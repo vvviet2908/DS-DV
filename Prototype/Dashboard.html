@@ -8,12 +8,11 @@
 <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
  </head>
  <body>
-   <div id="pie1"></div>
-     <div id="pie2"></div>
-	 <div id="lineChart"></div>
-	 <div id="histogram"></div>
-
-	 <div id="map"> </div>
+	<div id="pie1"></div>
+    <div id="pie2"></div>
+	<div id="lineChart"></div>
+	<div id="histogram"></div>
+	<div id="map"> </div>
 	 
 	 	<div id="tooltip" class="hidden">
 			<p><strong>COVID-19</strong></p>
@@ -21,14 +20,14 @@
 			<p><span id="date"></span></p>
 		</div>
 		
-		<script type="text/javascript" src = "line.js" > </script>  
-		<h2>COVID-19 EPIDEMIC in VIETNAM from 01/22/2020 to 06/13/2020</h2>
+<script type="text/javascript" src = "line.js" > </script>  
+<h2>COVID-19 EPIDEMIC in VIETNAM from 01/22/2020 to 06/13/2020</h2>
 <style>
 
-      #pie1 {    
+#pie1 {    
 	position:absolute;
-	top:70px;
-	left:510px;
+	top:100px;
+	left:550px;
 	width:400px;
 	height: 400px; 
 	font-family: sans-serif;
@@ -36,8 +35,8 @@
 }
 #pie2 {    
 	position:absolute;
-	top:70px;
-	left:910px;
+	top:100px;
+	left:950px;
 	width:400px;
 	height: 400px;
 	font-family: sans-serif;
@@ -46,15 +45,15 @@
 
 #histogram{
 	position:absolute;
-	top:410px;
-	left:810px;
+	top:435px;
+	left:830px;
 	width:600px;
 	height:400px; 
 }
 
 #lineChart{
 position:absolute;
-	top:410px;
+	top:455px;
 	left:10px;
 	width:800px;
 	height:400px; 
@@ -65,7 +64,7 @@ position:absolute;
 top:50px;
 left:10px;
 width:500px;
-height:400px;
+height:390px;
 }
 
 svg {
@@ -111,50 +110,49 @@ text-anchor: middle;
 } 
 
 
-
-			circle:hover {
-				fill: orange;
-			}
+circle:hover {
+	fill: orange;
+}
 			
-			#tooltip {
-				position: absolute;
-				width: auto;
-				height: auto;
-				padding: 10px;
-				background-color: white;
-				-webkit-border-radius: 10px;
-				-moz-border-radius: 10px;
-				border-radius: 10px;
-				-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-				-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-				box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-				pointer-events: none;
-			}
+#tooltip {
+	position: absolute;
+	width: auto;
+	height: auto;
+	padding: 10px;
+	background-color: white;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+	pointer-events: none;
+}
 			
-			#tooltip.hidden {
-				display: none;
-			}
+#tooltip.hidden {
+	display: none;
+}
 			
-			#tooltip p {
-				margin: 0;
-				font-family: sans-serif;
-				font-size: 16px;
-				line-height: 20px;
-  }
-  div.tooltip1 { 
-         position: absolute;
-				width: auto;
-				height: auto;
-				padding: 10px;
-				background-color: white;
-				-webkit-border-radius: 10px;
-				-moz-border-radius: 10px;
-				border-radius: 10px;
-				-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-				-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-				box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-				pointer-events: none;  
-      }
+#tooltip p {
+	margin: 0;
+	font-family: sans-serif;
+	font-size: 16px;
+	line-height: 20px;
+}
+div.tooltip1 { 
+    position: absolute;
+	width: auto;
+	height: auto;
+	padding: 10px;
+	background-color: white;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+	pointer-events: none;  
+}
 
  
 body {
@@ -165,9 +163,8 @@ line-height: 1.5;
 }
     </style>
 	
- <script type="text/javascript" src = "pie1.js" > </script>
- <script type="text/javascript" src = "pie2.js" > </script>
+<script type="text/javascript" src = "pie1.js" > </script>
+<script type="text/javascript" src = "pie2.js" > </script>
 <script type="text/javascript" src = "histogram.js" > </script>
-
 <script type="text/javascript" src = "mapzoom.js" > </script>  
  </body>
